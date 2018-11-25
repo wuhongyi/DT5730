@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 11月 12 18:06:49 2018 (+0800)
-// Last-Updated: 六 11月 17 20:24:58 2018 (+0800)
+// Last-Updated: 日 11月 25 21:02:08 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 21
+//     Update #: 25
 // URL: http://wuhongyi.cn 
 
 #ifndef _BOARD_H_
@@ -194,10 +194,14 @@ public:
   CAEN_DGTZ_ErrorCode SetDPPEventAggregation(int threshold, int maxsize);
 
 
+  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+  
+  void PrintRegisters();
 
 
 
-
+  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+  
 
   
   // Calibrate the board
@@ -214,6 +218,30 @@ public:
   void PrintInfo();
   
   CAEN_DGTZ_ErrorCode OpenDigitizer();
+
+
+  // return  0=success; -1=error
+  void Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChInBoard);
+
+  // Set a bit in a 32-bit unsigned integer.
+  unsigned int SetBit_32(unsigned short bit,unsigned int value);//将value第bit位设为1
+
+  // Clear a bit in a 32-bit unsigned integer.
+  unsigned int ClrBit_32(unsigned short bit,unsigned int value);//将value第bit位设为0
+
+  // Test a bit in a 32-bit unsigned integer.
+  unsigned int TstBit_32(unsigned short bit,unsigned int value );//获得value第bit位数值
+
+  // 十进制转二进制
+  // d 十进制数
+  // bstr 二进制字符串
+  // return 出错返回-1，成功返回字符串长度
+  int Decimal2Binary(uint32_t d, char *bstr);
+
+  // Get time in milliseconds
+  // return  time in msec
+  long GetTime();
+
   
 private:
   Digitizer* dig;
@@ -226,7 +254,9 @@ protected:
   char* readoutBuffer;
   uint32_t bufferSize;
   char *EventPtr;
-  uint32_t size;  
+  uint32_t size;
+
+
 };
 
 #endif /* _BOARD_H_ */
