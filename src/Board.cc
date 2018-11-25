@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 11月 12 18:07:01 2018 (+0800)
-// Last-Updated: 日 11月 25 21:01:57 2018 (+0800)
+// Last-Updated: 日 11月 25 21:51:02 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 33
+//     Update #: 45
 // URL: http://wuhongyi.cn 
 
 #include "Board.hh"
@@ -167,12 +167,12 @@ Board::Board()
   SetDPPParameters(0xFF,&dpppsdParams);
   
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
+  
   for (uint32_t i = 0; i < 8; ++i)
     {
       //for x725 and x730 Recordlength is common to paired channels (you can set different RL for different channel pairs)
       if(i%2==0)
-	SetRecordLength(1024, i);
+      	SetRecordLength(1024, i);//8的倍数
 
       // Set a DC offset to the input signal to adapt it to digitizer's dynamic range
       SetChannelDCOffset(i,0x8000);
@@ -562,6 +562,15 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
       printf("Input Dynamic Range (0x1%d28) (channel %d): %s\n",ch,ch,bstr);
     }
 
+  // Channel Status Register
+  for (int ch = 0; ch < MaxNChInBoard; ++ch)
+    {
+      ret |= CAEN_DGTZ_ReadRegister(handle, (0x102C | (ch<<8)), &Register_Data);
+      Decimal2Binary(Register_Data,bstr);
+      printf("Channel Status Register (0x1%d2C) (channel %d): %s\n",ch,ch,bstr);
+    }
+
+  
   // Number of Events per Aggregate
   for (int ch = 0; ch < MaxNChInBoard; ++ch)
     {
@@ -762,9 +771,10 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
   printf("Front Panel TRG-OUT (GPO) Enable Mask (0x8110): %s\n",bstr);
 
   // LVDS I/O Data
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0x8118, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("LVDS I/O Data (0x8118): %s\n",bstr);  
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0x8118, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("LVDS I/O Data (0x8118): %s\n",bstr); 
+  
 
   // Front Panel I/O Control
   ret |= CAEN_DGTZ_ReadRegister(handle, 0x811C, &Register_Data);
@@ -781,10 +791,10 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
   Decimal2Binary(Register_Data,bstr);
   printf("ROC FPGA Firmware Revision (0x8124): %s\n",bstr);
 
-  // Set Monitor DAC
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0x8138, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("Set Monitor DAC (0x8138): %s\n",bstr);  
+  // Voltage Level Mode Configuration
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0x8138, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Voltage Level Mode Configuration (0x8138): %s\n",bstr);  
 
   // Board Info
   ret |= CAEN_DGTZ_ReadRegister(handle, 0x8140, &Register_Data);
@@ -835,10 +845,15 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
     }    
   
   // Front Panel LVDS I/O New Features
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0x81A0, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("Front Panel LVDS I/O New Features (0x81A0): %s\n",bstr);
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0x81A0, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Front Panel LVDS I/O New Features (0x81A0): %s\n",bstr);
 
+  // Extended Veto Delay
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0x81C4, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Extended Veto Delay (0x81C4): %s\n",bstr);
+  
   // Readout Control
   ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF00, &Register_Data);
   Decimal2Binary(Register_Data,bstr);
@@ -850,24 +865,24 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
   printf("Readout Status (0xEF04): %s\n",bstr);
 
   // Board ID
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF08, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("Board ID (0xEF08): %s\n",bstr);
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF08, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Board ID (0xEF08): %s\n",bstr);
 
   // MCST Base Address and Control
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF0C, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("MCST Base Address and Control (0xEF0C): %s\n",bstr);
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF0C, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("MCST Base Address and Control (0xEF0C): %s\n",bstr);
 
   // Relocation Address
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF10, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("Relocation Address (0xEF10): %s\n",bstr); 
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF10, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Relocation Address (0xEF10): %s\n",bstr); 
 
   // Interrupt Status/ID
-  ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF14, &Register_Data);
-  Decimal2Binary(Register_Data,bstr);
-  printf("Interrupt Status/ID (0xEF14): %s\n",bstr); 
+  // ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF14, &Register_Data);
+  // Decimal2Binary(Register_Data,bstr);
+  // printf("Interrupt Status/ID (0xEF14): %s\n",bstr); 
   
   // Interrupt Event Number
   ret |= CAEN_DGTZ_ReadRegister(handle, 0xEF18, &Register_Data);
@@ -918,6 +933,11 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
   ret |= CAEN_DGTZ_ReadRegister(handle, 0xF018, &Register_Data);
   Decimal2Binary(Register_Data,bstr);
   printf("Configuration ROM Constant BYTE 0 (0xF018): %s\n",bstr); 
+
+  // Configuration ROM C Code
+  ret |= CAEN_DGTZ_ReadRegister(handle, 0xF01C, &Register_Data);
+  Decimal2Binary(Register_Data,bstr);
+  printf("Configuration ROM C Code (0xF01C): %s\n",bstr); 
   
   // Configuration ROM R Code
   ret |= CAEN_DGTZ_ReadRegister(handle, 0xF020, &Register_Data);
@@ -999,13 +1019,10 @@ void Board::Read_DGTZ_Register_725_730_DPP_PSD_Revision05(int handle,int MaxNChI
   Decimal2Binary(Register_Data,bstr);
   printf("Configuration ROM VCXO Type (0xF088): %s\n",bstr);
   
-
-  
   if(ret)
     {
-      printf("Error:  Read_DGTZ_Register_725_730_DPP_PSD_Revision03 !!!\n");
+      printf("Error:  Read_DGTZ_Register_725_730_DPP_PSD_Revision05 !!!\n");
     }  
-  
 }
 
 
