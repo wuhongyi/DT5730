@@ -1,0 +1,56 @@
+## BoardParameters.txt --- 
+## 
+## Description: 
+## Author: Hongyi Wu(吴鸿毅)
+## Email: wuhongyi@qq.com 
+## Created: 日 4月 24 15:38:34 2016 (+0800)
+## Last-Updated: 一 11月 26 19:40:18 2018 (+0800)
+##           By: Hongyi Wu(吴鸿毅)
+##     Update #: 32
+## URL: http:##wuhongyi.github.io 
+
+*** DPP PSD Parameters for CAEN Digitizer ***
+*** Board: 00 ***
+[RunStartStopDelay]
+0
+[RecordLength]
+140
+[ChannelMask]
+11111111
+[TriggerHoldOff]
+8
+Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
+[COMMON]
+  ALL   POS   43      30     50      1       0       24     100     8     50     1     1     0      4      1
+[INDIVIDUAL]
+
+
+
+
+/* end */
+/**************************************************************************************************************************************/
+
+RunStartStopDelay: Set the delay time between the arrival of the start signal at the input of the board (either SIN or TRGIN) and the actual start of run
+
+Channel: set "ALL" in [COMMON] section; set channel number in [INDIVIDUAL] section; set negative value for disabled channel in [INDIVIDUAL] section
+Pol   : Polarity (Optional value: POS or NEG) (case sensitive)
+Offset: add a DC offset to the input signal -> 0x7FFF+(XXXX)/100*0xFFFF
+PreTrg: pre-trigger size, which is the portion of acquisition window visible before a trigger
+
+
+thr: Trigger Threshold // scale 2 factor for LSB
+selft: Self Trigger Mode: 0(Disabled) 1(Enabled)
+csecs: Charge sensibility: Options for Input Range 2Vpp: 0(5fC/LSB) 1(20fC/LSB) 2(80fC/LSB) 3(320fC/LSB) 4(1.28pC/LSB0) 5(5.12pC/LSB)    Options for Input Range 0.5Vpp: 0(1.25fC/LSB) 1(5fC/LSB) 2(20fC/LSB) 3(80fC/LSB) 4(320fC/LSB) 5(1.28pC/LSB)
+sgate: Short Gate Width: N*2ns
+lgate: Long Gate Width: N*2ns
+pgate: Pre Gate Width: N*2ns
+tvaw: Trigger Validation Acquisition Window
+nsbl: The number of samples for the baseline averaging: 0(absolute Bl) 1(16samp) 2(64samp) 3(256samp) 4(1024samp)
+discr: 0:LED   1:CFD
+cfdf: CFD fraction: 0->25%; 1->50%; 2->75%; 3->100%
+cfdd: CFD delay: N*2ns
+trgc: 0:Peak  1:Threshold
+
+
+## 
+## BoardParameters.txt ends here

@@ -1,0 +1,78 @@
+## BoardParameters.txt --- 
+## 
+## Description: 
+## Author: Hongyi Wu(吴鸿毅)
+## Email: wuhongyi@qq.com 
+## Created: 日 4月 24 15:38:34 2016 (+0800)
+## Last-Updated: 一 11月 26 14:28:38 2018 (+0800)
+##           By: Hongyi Wu(吴鸿毅)
+##     Update #: 7
+## URL: http:##wuhongyi.github.io 
+
+*** DPP PSD Parameters for CAEN Digitizer ***
+*** Board: 00 ***
+[RunStartStopDelay]
+0
+[RecordLength]
+1000
+[ChannelMask]
+11111111
+[TriggerHoldOff]
+0
+Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
+[COMMON]
+  ALL   POS   43      200    50      1       0     24    100     8       50     1      1     0      4      1
+[INDIVIDUAL]
+
+
+*** Board: 01 ***
+[RunStartStopDelay]
+0
+[RecordLength]
+1000
+[ChannelMask]
+11111111
+Channel POL Offset PreTrg Thresh SmoFac Delayb TrigHo DecTim RisTim FlaTop BLMean TrGain PkDely PkMean BLHold PkHold TimRTD DgGain Decimt TrgWin  Otrej
+[COMMON]
+  ALL   POS   43    200    1000    1     100    3000  50000   1000   1000     1    1.0     1000    20   1000   2000    0       0     0       0     0
+[INDIVIDUAL]
+
+
+
+
+/* end */
+/**************************************************************************************************************************************/
+
+RunStartStopDelay: Set the delay time between the arrival of the start signal at the input of the board (either SIN or TRGIN) and the actual start of run
+
+Channel: set "ALL" in [COMMON] section; set channel number in [INDIVIDUAL] section; set negative value for disabled channel in [INDIVIDUAL] section
+Pol   : Polarity (Optional value: POS or NEG) (case sensitive)
+Offset: add a DC offset to the input signal -> 0x7FFF+(XXXX)/100*0xFFFF
+PreTrg: pre-trigger size, which is the portion of acquisition window visible before a trigger
+Thresh: Trigger Threshold// scale 2 factor for LSB
+
+trgc 0:Peak  1:Threshold
+discr 0:LED   1:CFD
+
+
+SmoFac: Trigger Filter smoothing factor
+Delayb: Input Signal Rise time 
+TrigHo: Trigger Hold Off 
+DecTim: Decay Time Constant 
+RisTim: Trapezoid Rise Time 
+FlaTop: Trapezoid Flat Top  
+BLMean: Number of sample for Baseline Mean (Optional value: 0(0), 1(16), 2(64), 3(256), 4(1024), 5(4096), 6(16384 samples))
+TrGain: Energy Normalization Factor
+PkDely: Flat top delay (peaking delay) 
+PkMean: Number of sample for Peak Mean (Optional value: 0(1), 1(4), 2(16), 3(64 samples))
+BLHold: Base Line Hold Off 
+PkHold: Peak Hold Off 
+TimRTD: Fixed time window for the rise time discrimination (RTD)  (When 0, the RTD is disabled)
+DgGain: Digital probe gain (Optional value: 0(1), 1(2-Decimt>=2), 2(4-Decimt>=4), 3(8-Decimt>=8))
+Decimt: Decimation of input signal (Optional value: 0(disabled), 1(2), 2(4), 3(8 samples))
+TrgWin: Trigger acceptance window in coincidence mode 
+Otrej :
+
+
+## 
+## BoardParameters.txt ends here

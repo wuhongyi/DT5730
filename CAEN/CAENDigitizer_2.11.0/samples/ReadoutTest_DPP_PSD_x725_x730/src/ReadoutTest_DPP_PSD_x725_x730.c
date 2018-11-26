@@ -252,7 +252,7 @@ int main(int argc, char *argv[])
         Params[b].RecordLength = 140;                              // Num of samples of the waveforms (only for Oscilloscope mode) 
         Params[b].ChannelMask = 0xFF;                               // Channel enable mask  
         Params[b].EventAggr = 1;                                  // number of events in one aggregate (0=automatic) 17554
-        Params[b].PulsePolarity = CAEN_DGTZ_PulsePolarityNegative; // Pulse Polarity (this parameter can be individual)
+        Params[b].PulsePolarity = CAEN_DGTZ_PulsePolarityPositive; // Pulse Polarity (this parameter can be individual)
 
         /****************************\
         *      DPP parameters        *
