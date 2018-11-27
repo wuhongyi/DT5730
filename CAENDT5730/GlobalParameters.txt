@@ -4,9 +4,9 @@
 ## Author: Hongyi Wu(吴鸿毅)
 ## Email: wuhongyi@qq.com 
 ## Created: 日 4月 24 15:41:36 2016 (+0800)
-## Last-Updated: 一 11月 26 19:44:43 2018 (+0800)
+## Last-Updated: 二 11月 27 19:35:17 2018 (+0800)
 ##           By: Hongyi Wu(吴鸿毅)
-##     Update #: 15
+##     Update #: 17
 ## URL: http:##wuhongyi.github.io 
 
 ##==============================================================================
@@ -49,6 +49,7 @@ ExtTrgMode CAEN_DGTZ_TRGMODE_ACQ_ONLY
 
 ##==============================================================================
 # CAEN_DGTZ_TRGMODE_DISABLED / CAEN_DGTZ_TRGMODE_EXTOUT_ONLY / CAEN_DGTZ_TRGMODE_ACQ_ONLY / CAEN_DGTZ_TRGMODE_ACQ_AND_EXTOUT
+# 开启该功能时，所有路被动触发。现在这个程序中未实现
 SelfTrgMode CAEN_DGTZ_TRGMODE_ACQ_ONLY
 
 ##==============================================================================
@@ -60,6 +61,7 @@ EventAggr  0
 RunSyncMode CAEN_DGTZ_RUN_SYNC_Disabled
 
 ##==============================================================================
+# 这个没用
 # CAEN_DGTZ_AM_TRIGGER_MAJORITY / CAEN_DGTZ_AM_TEST / CAEN_DGTZ_AM_ANALOG_INSPECTION / CAEN_DGTZ_AM_BUFFER_OCCUPANCY / CAEN_DGTZ_AM_VOLTAGE_LEVEL
 AnalogMonOutput  CAEN_DGTZ_AM_BUFFER_OCCUPANCY
 
