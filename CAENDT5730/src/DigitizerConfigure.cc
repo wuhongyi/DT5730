@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:56 2016 (+0800)
-// Last-Updated: 一 11月 26 20:57:37 2018 (+0800)
+// Last-Updated: 五 11月 30 15:18:02 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 199
+//     Update #: 219
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerGlobals.hh"
@@ -179,7 +179,6 @@ int DigitizerInit(CAEN_DGTZ_DPP_PSD_Params_t *PKU_DGTZ_DPPParams,DigitizerParams
       // CAEN_DGTZ_DPP_SAVE_PARAM_EnergyOnly   Only energy (DPP-PHA) or charge (DPP-PSD/DPP-CI v2) is returned 
       // CAEN_DGTZ_DPP_SAVE_PARAM_TimeOnly   Only time is returned 
       // CAEN_DGTZ_DPP_SAVE_PARAM_EnergyAndTime  Both energy/charge and time are returned 
-      // CAEN_DGTZ_DPP_SAVE_PARAM_ChargeAndTime  deprecated On DPP-PSD and DPP-CI use CAEN_DGTZ_DPP_SAVE_PARAM_EnergyAndTime 
       // CAEN_DGTZ_DPP_SAVE_PARAM_None    No histogram data is returned 
       tempstring1 = ReadValue<std::string>("SaveParam",PKU_DGTZ_GlobalParametersFileName);
       std::cout<<"SaveParam:"<<" "<<tempstring1<<std::endl;
@@ -657,6 +656,18 @@ void CheckKeyboard(DigitizerRun_t *PKU_DGTZ_RunManager,int *PKU_DGTZ_handle,CAEN
 		    delete PKU_DGTZ_Graph;
 		    PKU_DGTZ_Graph = NULL;
 		  }
+		if(PKU_DGTZ_Short != NULL)
+		  {
+		    delete PKU_DGTZ_Short;
+		    PKU_DGTZ_Short = NULL;
+		  }
+		if(PKU_DGTZ_Long != NULL)
+		  {
+		    delete PKU_DGTZ_Long;
+		    PKU_DGTZ_Long = NULL;
+		  }
+		
+		
 		if(PKU_DGTZ_Canvas != NULL)
 		  {
 		    delete PKU_DGTZ_Canvas;
@@ -679,6 +690,8 @@ void CheckKeyboard(DigitizerRun_t *PKU_DGTZ_RunManager,int *PKU_DGTZ_handle,CAEN
 		    // PKU_DGTZ_Graph->GetXaxis()->SetTitle("time[10us/1000]");
 		    // PKU_DGTZ_Graph->GetYaxis()->SetTitle("channel");
 		  }
+		if(PKU_DGTZ_Short == NULL) PKU_DGTZ_Short = new TGraph();
+		if(PKU_DGTZ_Long == NULL) PKU_DGTZ_Long = new TGraph();
 	      }
 	    break;
 	  }
@@ -776,17 +789,21 @@ void PrintRunningStatus(DigitizerRun_t *PKU_DGTZ_RunManager)
     }
 }
 
-void PlotROOTGraph(DigitizerRun_t *PKU_DGTZ_RunManager,int b,int ch,int size,uint16_t *WaveData)
+void PlotROOTGraph(DigitizerRun_t *PKU_DGTZ_RunManager,int b,int ch,int size,uint16_t *WaveData,uint8_t  *DTrace1,uint8_t  *DTrace2)
 {
   char picturename[32];
   int i;
-  sprintf(picturename, "Board %d - Channel %d;time[10us/1000];channel",b,ch);
+  sprintf(picturename, "Board %d - Channel %d;time[20ns/10];channel",b,ch);
   // if(PKU_DGTZ_Graph == NULL) std::cout<<"^^^^^^^^^"<<std::endl;
   PKU_DGTZ_Graph->SetTitle(picturename);
   for(i=0; i<size; i++)
     {
       PKU_DGTZ_Graph->SetPoint(i,i,WaveData[i]);
+      PKU_DGTZ_Short->SetPoint(i,i,DTrace2[i]*100.0+WaveData[0]);
+      PKU_DGTZ_Long->SetPoint(i,i,DTrace1[i]*100.0+WaveData[0]);
     }
+  PKU_DGTZ_Short->SetLineColor(3);
+  PKU_DGTZ_Long->SetLineColor(4);
   if(PKU_DGTZ_RunManager->PlotColor)
     {
       PKU_DGTZ_Graph->SetLineColor(2);
@@ -799,6 +816,8 @@ void PlotROOTGraph(DigitizerRun_t *PKU_DGTZ_RunManager,int b,int ch,int size,uin
     }
   PKU_DGTZ_Canvas->cd();
   PKU_DGTZ_Graph->Draw("AL");
+  PKU_DGTZ_Short->Draw("Lsame");
+  PKU_DGTZ_Long->Draw("Lsame");
   // PKU_DGTZ_Canvas->Modified();
   PKU_DGTZ_Canvas->Update();
 }
@@ -843,12 +862,24 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
       return -1;
     }
 
+  // Read  registers
+  Read_DGTZ_Register_725_730_DPP_PSD_Revision05(handle,8);
+  if(ret) 
+    {
+      printf("Read registers ERROR!\n");
+      return -1;
+    }
+
+
+
+  
   // set the configuration register for basic function
   // ret |= CAEN_DGTZ_WriteRegister(handle, 0x8000, 0x01000114);  // Channel Control Reg (indiv trg, seq readout) ??
   // ret |= CAEN_DGTZ_WriteRegister(handle,0x811C, 0xC003C); // serve per mandare SW trg individuali e per abilitare il ts reset
-  ret |= CAEN_DGTZ_WriteRegister(handle,0x8004, 0x00020000); // Extras Recording
-  // for (int ch = 0; ch < 8; ++ch)
-  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1084 | (ch<<8)), 0x207); 
+  ret |= CAEN_DGTZ_WriteRegister(handle,0x8004, 0x20000); // Extras Recording
+  ret |= CAEN_DGTZ_WriteRegister(handle,0x8004, 0x80000); 
+  for (int ch = 0; ch < 8; ++ch)
+  ret |= CAEN_DGTZ_WriteRegister(handle,(0x1084 | (ch<<8)), 0x207); 
 
 
   
@@ -1053,7 +1084,7 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
   */
 
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_1, CAEN_DGTZ_DPP_VIRTUALPROBE_Input);
-  ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_2, CAEN_DGTZ_DPP_VIRTUALPROBE_Baseline);
+  ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_2, CAEN_DGTZ_DPP_VIRTUALPROBE_None);
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, DIGITAL_TRACE_1, CAEN_DGTZ_DPP_DIGITALPROBE_Gate);
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, DIGITAL_TRACE_2, CAEN_DGTZ_DPP_DIGITALPROBE_GateShort);
   

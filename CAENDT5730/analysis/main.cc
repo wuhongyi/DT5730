@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Fri Apr 29 21:54:43 2016 (+0800)
-// Last-Updated: 一 6月 13 21:23:08 2016 (+0800)
+// Last-Updated: 五 11月 30 13:38:28 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 19
+//     Update #: 23
 // URL: http://wuhongyi.cn 
 
 #include <cstdio>
@@ -42,16 +42,22 @@ int main(int argc, char *argv[])
 
   TFile *f = NULL;
   TTree *t = NULL;
-  int b;
-  int ch;
-  int size;
-  unsigned short energy;//uint16_t
-  unsigned long time;//uint64_t
-  int sample[10000];
+
+  short ch;
+  unsigned int TimeTag;
+  short ChargeShort;//int16_t
+  short ChargeLong;
+  uint32_t Format;
+  uint32_t Extras;
+  unsigned long ts;//uint64_t
+  short ft;
+  short size;
+  short sample[10000];
   short WaveData[10000];//int16_t
 
+  
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-  for(int i=0;i<1500;i++) sample[i]=i;
+  for(int i=0;i<10000;i++) sample[i]=i;
   for (int i = runnum_min; i <= runnum_max; ++i)//number
     {
       flag = false;
@@ -73,24 +79,28 @@ int main(int argc, char *argv[])
 	      sprintf(filename,"%s/run%04d.root",filepath,i);
 	      f = new TFile(filename,"RECREATE");//"RECREATE" "READ"
 	      t = new TTree("t","PKU Digitizer data");
-	      t->Branch("b", &b, "b/I");
-	      t->Branch("ch", &ch, "ch/I");
-	      t->Branch("size", &size, "size/I");
-	      t->Branch("e", &energy, "e/s");
-	      t->Branch("t", &time, "t/l");
+	      t->Branch("ch", &ch, "ch/S");
+	      t->Branch("qs", &ChargeShort, "qs/S");
+	      t->Branch("ql", &ChargeLong, "ql/S");
+	      t->Branch("format", &Format, "format/i");
+	      t->Branch("ts", &ts, "ts/l");
+	      t->Branch("ft", &ft, "ft/S");
+	      t->Branch("size", &size, "size/S");
 	      t->Branch("wave", WaveData, "wave[size]/S");
-	      t->Branch("sample",&sample,"sample[size]/I");
+	      t->Branch("sample",&sample,"sample[size]/S");
 	    }
 	  std::cout<<"number:"<<i<<"  file:"<<ii<<std::endl;
 	  while(!feof(rawfile))
 	    {
-	      fread(&b,4,1,rawfile);
-	      fread(&ch,4,1,rawfile);
-	      fread(&size,4,1,rawfile);
-	      fread(&energy,2,1,rawfile);
-	      fread(&time,8,1,rawfile);
+	      fread(&ch,2,1,rawfile);
+	      fread(&TimeTag,4,1,rawfile);
+	      fread(&ChargeShort,2,1,rawfile);
+	      fread(&ChargeLong,2,1,rawfile);
+	      fread(&Format,4,1,rawfile);
+	      fread(&Extras,4,1,rawfile);	      
+	      fread(&size,2,1,rawfile);
 	      fread(WaveData,2,size,rawfile);
-
+   
 	      
 	      if(feof(rawfile)) break;
 	      
@@ -101,6 +111,8 @@ int main(int argc, char *argv[])
 	      // 	}
 	      // std::cout<<std::endl;
 
+	      ts = ((Extras&0xffff0000)<<15) + TimeTag;
+	      ft = Extras&0x3ff;
 	      t->Fill();
 	      
 	    }

@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 20:56:02 2016 (+0800)
-// Last-Updated: 一 11月 26 19:32:01 2018 (+0800)
+// Last-Updated: 五 11月 30 15:55:36 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 141
+//     Update #: 157
 // URL: http://wuhongyi.cn 
 
 #include "TRint.h"
@@ -136,10 +136,12 @@ int main(int argc, char *argv[])
   		    }
 
   		  flagplot = PKU_DGTZ_RunManager.PlotFlag && (PKU_DGTZ_RunManager.DoPlotBoard == b) && (PKU_DGTZ_RunManager.DoPlotChannel == ch);
-  		  if((PKU_DGTZ_Params[b].DPPAcqMode != CAEN_DGTZ_DPP_ACQ_MODE_List) && (PKU_DGTZ_RunManager.WriteFlag || flagplot))//CAEN_DGTZ_DPP_ACQ_MODE_Oscilloscope  CAEN_DGTZ_DPP_ACQ_MODE_Mixed
+  		  if(/*(PKU_DGTZ_Params[b].DPPAcqMode != CAEN_DGTZ_DPP_ACQ_MODE_List) &&*/ (PKU_DGTZ_RunManager.WriteFlag || flagplot))//CAEN_DGTZ_DPP_ACQ_MODE_Oscilloscope  CAEN_DGTZ_DPP_ACQ_MODE_Mixed
   		    {
   		      int size;
   	  	      uint16_t *WaveLine;
+		      uint8_t  *DTrace1;
+		      uint8_t  *DTrace2;
   	  	      CAEN_DGTZ_DecodeDPPWaveforms(PKU_DGTZ_handle[b], &PKU_DGTZ_Events[ch][ev], PKU_DGTZ_Waveform);// Get Waveform
 
   		      //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -147,17 +149,21 @@ int main(int argc, char *argv[])
 		      // Use waveform data here...
   	  	      size = (int)(PKU_DGTZ_Waveform->Ns); // Number of samples
   	  	      WaveLine = PKU_DGTZ_Waveform->Trace1;//Waveform. 
-
+		      DTrace1 = PKU_DGTZ_Waveform->DTrace1;
+		      DTrace2 = PKU_DGTZ_Waveform->DTrace2;
+		      
   		      if(PKU_DGTZ_RunManager.WriteFlag)
 			{
-			  // SaveWaveform(b, ch, size,PKU_DGTZ_Events[ch][ev].ChargeLong, WaveLine, PKU_DGTZ_RunManager.PrevTime[b][ch]);
-			  printf("%d %d %d %d %d\n",ch,size,PKU_DGTZ_Events[ch][ev].TimeTag,PKU_DGTZ_Events[ch][ev].ChargeShort,PKU_DGTZ_Events[ch][ev].ChargeLong);
+			  SaveWaveform((int16_t)ch,PKU_DGTZ_Events[ch][ev].TimeTag,PKU_DGTZ_Events[ch][ev].ChargeShort,PKU_DGTZ_Events[ch][ev].ChargeLong,PKU_DGTZ_Events[ch][ev].Format,PKU_DGTZ_Events[ch][ev].Extras, (int16_t)size, WaveLine);
+			  // printf("%d %d %d %d %d %d %d %d %d\n",ch,size,PKU_DGTZ_Events[ch][ev].TimeTag,PKU_DGTZ_Events[ch][ev].ChargeShort,PKU_DGTZ_Events[ch][ev].ChargeLong,PKU_DGTZ_Events[ch][ev].Baseline,PKU_DGTZ_Events[ch][ev].Format,PKU_DGTZ_Events[ch][ev].Format2,PKU_DGTZ_Events[ch][ev].Extras);
+			  // printf("%d %d %d %d \n",PKU_DGTZ_Events[ch][ev].TimeTag,(PKU_DGTZ_Events[ch][ev].Extras&0xffff0000)>>16,(PKU_DGTZ_Events[ch][ev].Extras&0xfc00)>>10,PKU_DGTZ_Events[ch][ev].Extras&0x3ff);
+			  // printf("%d %d\n",ch,PKU_DGTZ_Events[ch][ev].Baseline);
 			}
   		      if(flagplot)//plot
   		      	{
   		      	  if(PKU_DGTZ_RunManager.PlotEveryN%PKU_DGTZ_RunManager.PlotChooseN == 0)
   		      	    {
-  		      	      PlotROOTGraph(&PKU_DGTZ_RunManager, b, ch, size, WaveLine);// do plot
+  		      	      PlotROOTGraph(&PKU_DGTZ_RunManager, b, ch, size, WaveLine,DTrace1,DTrace2);// do plot
 			      PKU_DGTZ_RunManager.PlotEveryN ++;
   		      	    }
   		      	  else

@@ -4,9 +4,9 @@
 ## Author: Hongyi Wu(吴鸿毅)
 ## Email: wuhongyi@qq.com 
 ## Created: 日 4月 24 15:41:36 2016 (+0800)
-## Last-Updated: 二 11月 27 19:35:17 2018 (+0800)
+## Last-Updated: 五 11月 30 14:00:13 2018 (+0800)
 ##           By: Hongyi Wu(吴鸿毅)
-##     Update #: 17
+##     Update #: 18
 ## URL: http:##wuhongyi.github.io 
 
 ##==============================================================================
@@ -25,7 +25,7 @@ VMEBaseAddress  0
 
 ##==============================================================================
 # CAEN_DGTZ_IOLevel_NIM / CAEN_DGTZ_IOLevel_TTL
-IOlev  CAEN_DGTZ_IOLevel_NIM
+IOlev  CAEN_DGTZ_IOLevel_TTL
 
 ##==============================================================================
 # CAEN_DGTZ_DPP_ACQ_MODE_List / CAEN_DGTZ_DPP_ACQ_MODE_Oscilloscope / CAEN_DGTZ_DPP_ACQ_MODE_Mixed

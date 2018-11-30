@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:47 2016 (+0800)
-// Last-Updated: 一 11月 26 14:57:25 2018 (+0800)
+// Last-Updated: 五 11月 30 15:12:27 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 41
+//     Update #: 42
 // URL: http://wuhongyi.cn 
 
 #ifndef _DIGITIZERCONFIGURE_H_
@@ -33,7 +33,7 @@ void CheckKeyboard(DigitizerRun_t *PKU_DGTZ_RunManager,int *PKU_DGTZ_handle,CAEN
 // Calculate throughput and trigger rate (every second),print something about running information.
 void PrintRunningStatus(DigitizerRun_t *PKU_DGTZ_RunManager);
 
-void PlotROOTGraph(DigitizerRun_t *PKU_DGTZ_RunManager,int b,int ch,int size,uint16_t *WaveData);
+void PlotROOTGraph(DigitizerRun_t *PKU_DGTZ_RunManager,int b,int ch,int size,uint16_t *WaveData,uint8_t  *DTrace1,uint8_t  *DTrace2);
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

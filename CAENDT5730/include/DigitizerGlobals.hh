@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:11:05 2016 (+0800)
-// Last-Updated: 一 11月 26 11:22:58 2018 (+0800)
+// Last-Updated: 五 11月 30 14:50:03 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 35
+//     Update #: 36
 // URL: http://wuhongyi.cn 
 
 #ifndef _DIGITIZERGLOBALS_H_
@@ -130,7 +130,8 @@ struct DigitizerRun_t
 
 static TCanvas *PKU_DGTZ_Canvas = NULL;
 static TGraph *PKU_DGTZ_Graph = NULL;
-
+static TGraph *PKU_DGTZ_Short = NULL;
+static TGraph *PKU_DGTZ_Long = NULL;
 
 #endif /* _DIGITIZERGLOBALS_H_ */
 

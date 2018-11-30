@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 日 4月 24 17:55:37 2016 (+0800)
-// Last-Updated: 一 11月 26 15:00:08 2018 (+0800)
+// Last-Updated: 五 11月 30 13:10:50 2018 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 93
+//     Update #: 96
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerUser.hh"
@@ -97,14 +97,16 @@ void UpdateWhenFileFillUp(DigitizerRun_t *PKU_DGTZ_RunManager)
     }
 }
 
-int SaveWaveform(int b, int ch, int size, int16_t energy,uint16_t *WaveData,uint32_t time)
+int SaveWaveform(int16_t ch,uint32_t TimeTag,int16_t ChargeShort,int16_t ChargeLong,uint32_t Format,uint32_t Extras,int16_t size,uint16_t *WaveData)
 {
-  fwrite(&b,sizeof(int),1,PKU_DGTZ_FilePointer);
-  fwrite(&ch,sizeof(int),1,PKU_DGTZ_FilePointer);
-  fwrite(&size,sizeof(int),1,PKU_DGTZ_FilePointer);
-  fwrite(&energy,sizeof(uint16_t),1,PKU_DGTZ_FilePointer);
-  fwrite(&time,sizeof(uint32_t),1,PKU_DGTZ_FilePointer);
-  fwrite(WaveData,sizeof(int16_t),size,PKU_DGTZ_FilePointer);
+  fwrite(&ch,sizeof(int16_t),1,PKU_DGTZ_FilePointer);//channel
+  fwrite(&TimeTag,sizeof(uint32_t),1,PKU_DGTZ_FilePointer);
+  fwrite(&ChargeShort,sizeof(int16_t),1,PKU_DGTZ_FilePointer);
+  fwrite(&ChargeLong,sizeof(int16_t),1,PKU_DGTZ_FilePointer);
+  fwrite(&Format,sizeof(uint32_t),1,PKU_DGTZ_FilePointer);
+  fwrite(&Extras,sizeof(uint32_t),1,PKU_DGTZ_FilePointer);
+  fwrite(&size,sizeof(int16_t),1,PKU_DGTZ_FilePointer);//length size
+  fwrite(WaveData,sizeof(uint16_t),size,PKU_DGTZ_FilePointer);
   return 0;
 }
 
