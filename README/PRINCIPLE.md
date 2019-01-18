@@ -4,13 +4,14 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 二 1月 15 22:41:03 2019 (+0800)
-;; Last-Updated: 三 1月 16 19:23:29 2019 (+0800)
+;; Last-Updated: 五 1月 18 23:46:26 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 6
+;;     Update #: 7
 ;; URL: http://wuhongyi.cn -->
 
 # 工作原理
 
+<!-- toc -->
 
 ![Typical Gamma Neutron Waveforms](/img/TypicalGammaNeutronWaveforms.png)
 

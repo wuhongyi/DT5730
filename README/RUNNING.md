@@ -4,12 +4,14 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 15:01:28 2019 (+0800)
-;; Last-Updated: 五 1月 18 16:03:44 2019 (+0800)
+;; Last-Updated: 五 1月 18 23:46:52 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 1
+;;     Update #: 5
 ;; URL: http://wuhongyi.cn -->
 
 # 程序运行
+
+<!-- toc -->
 
 ## 程序编译
 
@@ -44,7 +46,7 @@ cd ../bin
 
 程序启动后，将会显示以下内容：
 
-<!-- ![程序启动](/img/dgtzinit.png) -->
+![程序启动](/img/dgtzinit.png)
 
 - 输入**q**退出程序。
 - 输入**s**来切换启动/关闭获取。
@@ -57,7 +59,7 @@ cd ../bin
 
 获取开启，将会向**run.log**写入开始时间，获取关闭时也会写入结束时间。当开启写数据模式时，先读取**Log**文件夹下的**RunNumber**文件中的数值为当前的运行编号（用在数据文件命名），并使该数值加一保存。在**Log**文件夹下生成当前时刻命名的文件夹(例如20190118150912)，文件夹内复制保存当前获取所用输入卡。并将当前运行编号写进**run.log**.
 
-开启写文本模式时候，获得当前运行编号N，第一次文件名为runN_0,文件大小达到 2 GB 自动保存，打开runN_1，依次类推。
+开启写文本模式时候，获得当前运行编号 N，第一次文件名为 runN\_0,文件大小达到 2 GB 自动保存，打开 runN\_1，依次类推。
 
 ```
 run0001_0 run0001_1
@@ -65,11 +67,11 @@ run0125_0
 run6241_0 run6241_1 run6241_2
 ```
 
-<!-- ![获取开启界面](img/dgtzstart.png) -->
+<!-- ![获取开启界面](/img/dgtzstart.png) -->
 
-<!-- ![数据写入界面](img/dgtzwrite.png) -->
+<!-- ![数据写入界面](/img/dgtzwrite.png) -->
 
-<!-- ![在线监视与数据写入界面](img/dgtzplot.png) -->
+<!-- ![在线监视与数据写入界面](/img/dgtzplot.png) -->
 
 ## 原始数据到 ROOT 文件的转换
 
@@ -101,9 +103,10 @@ PathToRawData ../data
 PlotChooseN 1000
 ```
 
-**PathToRawData**后面填写数据文件存放文件夹路径。**PlotChooseN**后面填写监视路每多少个信号画一次。
+**PathToRawData**后面填写数据文件存放文件夹路径。**PlotChooseN** 后面填写监视路每多少个信号更新一次。
 
-在输入卡**BoardParameters.txt**中对每个channel的参数进行设置。
+
+在输入卡**BoardParameters.txt**中对每个 channel 的参数进行设置。
 
 
 
