@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:56 2016 (+0800)
-// Last-Updated: 五 11月 30 15:18:02 2018 (+0800)
+// Last-Updated: 二 1月 15 13:58:33 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 219
+//     Update #: 231
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerGlobals.hh"
@@ -880,8 +880,10 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
   ret |= CAEN_DGTZ_WriteRegister(handle,0x8004, 0x80000); 
   for (int ch = 0; ch < 8; ++ch)
   ret |= CAEN_DGTZ_WriteRegister(handle,(0x1084 | (ch<<8)), 0x207); 
-
-
+  // for (int ch = 0; ch < 8; ++ch)
+  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1080 | (ch<<8)), 0x130040); 
+  for (int ch = 0; ch < 8; ++ch)
+  ret |= CAEN_DGTZ_WriteRegister(handle,(0x1028 | (ch<<8)), 0x1); 
   
   // Set the DPP acquisition mode
   //   This setting affects the modes Mixed and List (see CAEN_DGTZ_DPP_AcqMode_t definition for details)
@@ -1084,6 +1086,7 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
   */
 
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_1, CAEN_DGTZ_DPP_VIRTUALPROBE_Input);
+  // ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_1, CAEN_DGTZ_DPP_VIRTUALPROBE_CFD);
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, ANALOG_TRACE_2, CAEN_DGTZ_DPP_VIRTUALPROBE_None);
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, DIGITAL_TRACE_1, CAEN_DGTZ_DPP_DIGITALPROBE_Gate);
   ret |= CAEN_DGTZ_SetDPP_VirtualProbe(handle, DIGITAL_TRACE_2, CAEN_DGTZ_DPP_DIGITALPROBE_GateShort);

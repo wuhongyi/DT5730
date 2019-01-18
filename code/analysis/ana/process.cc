@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 日 7月  5 09:31:13 2015 (+0800)
-// Last-Updated: 五 5月  6 09:10:28 2016 (+0800)
+// Last-Updated: 一 1月 14 20:01:02 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 95
+//     Update #: 96
 // URL: http://wuhongyi.cn 
 
 #include <unistd.h>//要求6.00.00及以上才能被调用
@@ -43,7 +43,7 @@ void process()
   gSystem->Setenv("Dir",dir);//当前文件路径
   //=======================================================
   //将要处理的文件放在这里，支持tree名相同的多个结构相同的文件。特别适合用于Geant4多线程模拟的输出文件处理。
-  chain->Add("$Dir/../../data/run0030.root");//采用通配符
+  chain->Add("$Dir/../../data/run0100.root");//采用通配符
   // chain->Add("$Dir/why.root");
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

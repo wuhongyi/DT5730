@@ -4,9 +4,9 @@
 ## Author: Hongyi Wu(吴鸿毅)
 ## Email: wuhongyi@qq.com 
 ## Created: 日 4月 24 15:38:34 2016 (+0800)
-## Last-Updated: 一 11月 26 20:52:47 2018 (+0800)
+## Last-Updated: 二 1月 15 10:23:06 2019 (+0800)
 ##           By: Hongyi Wu(吴鸿毅)
-##     Update #: 33
+##     Update #: 38
 ## URL: http:##wuhongyi.github.io 
 
 *** DPP PSD Parameters for CAEN Digitizer ***
@@ -14,14 +14,14 @@
 [RunStartStopDelay]
 0
 [RecordLength]
-140
+144
 [ChannelMask]
 11111111
 [TriggerHoldOff]
 8
 Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
 [COMMON]
-  ALL   POS   43      30     50      1       0       24     100     8     50     1     1     0      4      1
+  ALL   NEG   -43      30     50      1       0       24     100     8     50     1     1     3      3      1
 [INDIVIDUAL]
 
 

@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 二 1月 15 23:47:26 2019 (+0800)
-;; Last-Updated: 三 1月 16 12:14:24 2019 (+0800)
+;; Last-Updated: 三 1月 16 14:17:03 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 2
+;;     Update #: 3
 ;; URL: http://wuhongyi.cn -->
 
 # 程序安装
@@ -14,6 +14,53 @@
 本获取经过 Scientific Linux 7 系统测试。建议采用 CentOS 7 或者 Scientific Linux 7。
 
 本获取要求 CERN ROOT 6，要求必须安装 FFTW3 库。
+
+**通过 yum 安装 fftw3**
+
+```bash
+yum -y install fftw.x86_64 fftw-devel.x86_64 fftw-libs.x86_64
+```
+
+**以下为可选安装，安装之后 ROOT 可使用功能更多。根据需要安装即可。**
+
+```bash
+yum -y install lz4.x86_64 lz4-devel.x86_64
+yum -y install gsl.x86_64 gsl-devel.x86_64
+yum -y install graphviz.x86_64 graphviz-devel.x86_64
+yum -y install ruby.x86_64 ruby-devel.x86_64 ruby-libs.x86_64
+yum -y install expect.x86_64 expect-devel.x86_64
+yum -y install davix.x86_64 davix-devel.x86_64
+yum -y install unuran.x86_64 unuran-devel.x86_64
+yum -y install avahi-compat-libdns_sd.x86_64 avahi-compat-libdns_sd-devel.x86_64
+yum -y install ftgl.x86_64 ftgl-devel.x86_64
+yum -y install glew.x86_64 glew-devel.x86_64
+yum -y install mysql++.x86_64 mysql++-devel.x86_64
+yum -y install cfitsio.x86_64 cfitsio-devel.x86_64
+yum -y install libxml2*
+yum -y install binutils-devel.x86_64
+yum -y install pythia8.x86_64 pythia8-devel.x86_64
+yum -y install redhat-lsb.x86_64
+yum -y install R.x86_64
+yum -y install R-RInside.x86_64 R-RInside-devel.x86_64 R-Rcpp.x86_64 R-Rcpp-devel.x86_64
+```
+
+**ROOT 安装方法**
+
+```bash
+## https://root.cern.ch/building-root
+# cmake安装方法，以 6.08.06 为例。 安装之后 .bashrc 中添加 source /opt/root60806/bin/thisroot.sh
+tar -zxvf root_v6.08.06.source.tar.gz
+mkdir buildroot60806
+cd buildroot60806/
+cmake -DCMAKE_INSTALL_PREFIX=/opt/root60806 -Dall=ON  ../root-6.08.06/
+make -j8
+make install
+rm -rf buildroot60806
+```
+
+
+
+
 
 ## CAEN Lib
 

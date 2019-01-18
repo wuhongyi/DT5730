@@ -4,9 +4,9 @@
 # Author: Hongyi Wu(吴鸿毅)
 # Email: wuhongyi@qq.com 
 # Created: 日 4月 24 15:24:50 2016 (+0800)
-# Last-Updated: 一 9月 12 21:09:17 2016 (+0800)
+# Last-Updated: 五 1月 18 15:53:40 2019 (+0800)
 #           By: Hongyi Wu(吴鸿毅)
-#     Update #: 36
+#     Update #: 39
 # URL: http://wuhongyi.cn 
 
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
@@ -20,8 +20,8 @@ project(${PROJ_NAME})
 #SET(CMAKE_BUILD_TYPE Debug)
 
 ##C99  ROOT不支持C++11采用以下两行
-#set(CMAKE_CXX_FLAGS " -fPIC -W -Wall -s")#
-#set(CMAKE_C_FLAGS " -fPIC -W -Wall -s")#
+# set(CMAKE_CXX_FLAGS " -fPIC -W -Wall -s")#
+# set(CMAKE_C_FLAGS " -fPIC -W -Wall -s")#
 ##C++11  ROOT支持C++11采用以下两行
 set(CMAKE_CXX_FLAGS "-std=c++11  -fPIC -W -Wall -s")#
 set(CMAKE_C_FLAGS "-std=c++11  -fPIC   -W -Wall -s")#
@@ -31,7 +31,7 @@ set(CMAKE_C_FLAGS "-std=c++11  -fPIC   -W -Wall -s")#
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 #find_package(ROOT REQUIRED)
 #COMPONENTS可选 ，REQUIRED COMPONENTS必须有
-find_package( ROOT COMPONENTS ASImage EG FFTW FitPanel Ged Geom Gui GuiBld GuiHtml GX11 GX11TTF Hbook Hist Html MathMore Minuit Minuit2 MLP Proof RGL RooFit RooFitCore Smatrix Spectrum Table TMVA TreePlayer TreeViewer )#
+find_package(ROOT COMPONENTS FFTW Gui GuiBld Hist MathMore Minuit Spectrum)#ASImage EG FFTW FitPanel Ged Geom Gui GuiBld GuiHtml GX11 GX11TTF Hbook Hist Html MathMore Minuit Minuit2 MLP Proof RGL RooFit RooFitCore Smatrix Spectrum Table TMVA TreePlayer TreeViewer 
 
 #----------------------------------------------------------------------------
 
