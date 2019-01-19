@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 15:01:28 2019 (+0800)
-;; Last-Updated: 五 1月 18 23:46:52 2019 (+0800)
+;; Last-Updated: 六 1月 19 13:59:30 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 5
+;;     Update #: 9
 ;; URL: http://wuhongyi.cn -->
 
 # 程序运行
@@ -18,10 +18,12 @@
 根据编译器版本不同（关键在于编译**ROOT**时候是否支持C++11，gcc4.8及以上），需要修改**CMakeLists.txt**文件中的以下内容：
 
 ```bash
+## g++ 版本小于 4.8时
 ##C99  ROOT不支持C++11采用以下两行
 set(CMAKE_CXX_FLAGS " -fPIC -W -Wall -s")#
 set(CMAKE_C_FLAGS " -fPIC -W -Wall -s")#
 
+## g++ 版本大于 4.8时
 ##C++11 ROOT支持C++11采用以下两行
 set(CMAKE_CXX_FLAGS "-std=c++11  -fPIC -W -Wall -s")#
 set(CMAKE_C_FLAGS "-std=c++11  -fPIC   -W -Wall -s")#
@@ -67,32 +69,57 @@ run0125_0
 run6241_0 run6241_1 run6241_2
 ```
 
-<!-- ![获取开启界面](/img/dgtzstart.png) -->
+![获取开启界面](/img/dgtzstart.png)
 
-<!-- ![数据写入界面](/img/dgtzwrite.png) -->
+![数据写入界面](/img/dgtzwrite.png)
 
 <!-- ![在线监视与数据写入界面](/img/dgtzplot.png) -->
 
-## 原始数据到 ROOT 文件的转换
+## 二进制转ROOT
 
-文件夹**analysis**内程序**raw2root.cc**用来将输出的二进制文件转成ROOT文件。
+文件夹 **analysis** 内程序 **raw2root** 用来将输出的二进制文件转成 ROOT 文件。
+
+需要先修改 **main.cc** 中原始数据的路径：
 
 ```cpp
-char filepath[128] ="../data";
+char filepath[1024] ="../../data";//不要以 / 结尾
 ```
 
-需要修改里面指向数据文件夹的路径。
+这里修改指向数据文件夹的路径。
 
 具体运行：
 
 ```bash
-make
+make       #编译
 ./raw2root
 ```
-会提示你输入需要转的文件最小编号跟最大编号。例如我要转文件编号0000到0120的文件，只需要输入0跟120即可。如果里面某些编号文件不存在会自动跳过。同一个运行标号的几个子文件会存在一个root文件中，例如**run0100_0,run0100_1,run0100_2**数据会转成**run0100.root**。
+
+之会提示您输入需要转的文件最小编号跟最大编号。例如我要转文件编号 0000 到 0120 的文件，只需要输入 0 空格 120 ，然后回车即可。如果里面某些编号文件不存在会自动跳过。同一个运行编号的几个子文件会存在一个 ROOT 文件中，例如 **run0100_0,run0100_1,run0100_2** 数据会转成 **run0100.root**。
 
 ----
 
+## 按时间排序
+
+文件夹 **analysis** 内程序 **timesort** 用来将 ROOT 文件中的事件按照时间戳从小到大进行排序。
+
+需要先修改 **main.cc** 中原始数据的路径：
+
+```cpp
+TString filepath ="../../data";//不要以 / 结尾
+```
+
+这里修改指向数据文件夹的路径。
+
+具体运行：
+
+```bash
+make       #编译
+./timesort
+```
+
+之会提示您输入需要转的文件最小编号跟最大编号。例如我要转文件编号 0000 到 0120 的文件，只需要输入 0 空格 120 ,然后回车即可。
+
+----
 
 ## 输入卡参数
 

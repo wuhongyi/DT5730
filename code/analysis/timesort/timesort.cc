@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 1月 14 19:44:11 2019 (+0800)
-// Last-Updated: 一 1月 14 21:36:29 2019 (+0800)
+// Last-Updated: 六 1月 19 10:53:46 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 17
+//     Update #: 18
 // URL: http://wuhongyi.cn 
 
 #include "timesort.hh"
@@ -41,9 +41,9 @@ timesort::timesort(TString filepath,int runnumber)
   tt->SetBranchAddress("format", &format, &b_format);
   tt->SetBranchAddress("ts", &ts, &b_ts);
   tt->SetBranchAddress("ft", &ft, &b_ft);
-  tt->SetBranchAddress("size", &size, &b_size);
-  tt->SetBranchAddress("wave", wave, &b_wave);
-  tt->SetBranchAddress("sample", sample, &b_sample);
+  // tt->SetBranchAddress("size", &size, &b_size);
+  // tt->SetBranchAddress("wave", wave, &b_wave);
+  // tt->SetBranchAddress("sample", sample, &b_sample);
 
   TotalEntry = tt->GetEntries();
 
@@ -55,9 +55,9 @@ timesort::timesort(TString filepath,int runnumber)
   t->Branch("format", &format, "format/i");
   t->Branch("ts", &ts, "ts/l");
   t->Branch("ft", &ft, "ft/S");
-  t->Branch("size", &size, "size/S");
-  t->Branch("wave", wave, "wave[size]/S");
-  t->Branch("dt",&sample,"dt[size]/S");
+  // t->Branch("size", &size, "size/S");
+  // t->Branch("wave", wave, "wave[size]/S");
+  // t->Branch("dt",&sample,"dt[size]/S");
   t->Branch("nevt", &snevt, "nevt/I");
 
   // tt->SetCacheSize(100*1024*1024);

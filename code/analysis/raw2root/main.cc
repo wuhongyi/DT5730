@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Fri Apr 29 21:54:43 2016 (+0800)
-// Last-Updated: 一 1月 14 21:04:25 2019 (+0800)
+// Last-Updated: 六 1月 19 10:28:50 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 25
+//     Update #: 26
 // URL: http://wuhongyi.cn 
 
 #include <cstdio>
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  char filepath[128] ="../../data";
+  char filepath[1024] ="../../data";//不要以 / 结尾
 
   
   int runnum_min,runnum_max;
