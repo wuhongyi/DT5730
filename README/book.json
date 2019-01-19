@@ -1,6 +1,6 @@
 {
-    "title": "VMEDAQ",
-    "description": "北京大学实验核物理组VME获取",
+    "title": "DT5730 DAQ",
+    "description": "DT5730 获取程序说明书",
     "author": "Hongyi Wu(吴鸿毅)",
     "plugins": [
 	"search",

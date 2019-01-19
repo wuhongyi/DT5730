@@ -4,14 +4,16 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 二 1月 15 22:41:03 2019 (+0800)
-;; Last-Updated: 五 1月 18 23:46:26 2019 (+0800)
+;; Last-Updated: 六 1月 19 20:02:02 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 7
+;;     Update #: 8
 ;; URL: http://wuhongyi.cn -->
 
 # 工作原理
 
 <!-- toc -->
+
+下图为液闪探测器典型波形示意图，
 
 ![Typical Gamma Neutron Waveforms](/img/TypicalGammaNeutronWaveforms.png)
 
@@ -51,7 +53,7 @@ PSD = (Qlong-Qshort)/Qlong
 
 ![Classical Implementation Of The Constant Fraction Discriminator](/img/ClassicalImplementationOfTheConstantFractionDiscriminator.png)
 
-CFD 在数字化中的实现如图所示。输入样本分为两个路径：第一个以采样时钟的步长执行延迟（2 ns），第二个执行衰减。 衰减的可能选择是：相对于输入幅度的 25％，50％，75％ 和 100％（即无衰减）。 CFD 信号被称为动态的中等尺度，即在 730 系列的情况下为道址 8192。
+CFD 在数字化中的实现如图所示。输入样本分为两个路径：第一个以采样时钟的步长执行延迟（2 ns），第二个执行衰减。 衰减的可能选择是：相对于输入幅度的 25％，50％，75％ 和 100％（即无衰减）。 CFD 信号被称为动态的中间道址，即在 730 系列的情况下为道址 8192。
 
 ![Implementation Of The Digital CFD In The DPP-PSD Firmware Of 730 Series](/img/ImplementationOfTheDigitalCFDInTheDPPPSDFirmwareOf730Series.png)
 

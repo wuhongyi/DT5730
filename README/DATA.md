@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 23:52:09 2019 (+0800)
-;; Last-Updated: 六 1月 19 14:34:25 2019 (+0800)
+;; Last-Updated: 六 1月 19 19:59:48 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 4
+;;     Update #: 5
 ;; URL: http://wuhongyi.cn -->
 
 # 数据结构
@@ -68,7 +68,19 @@ t->Draw("wave:sample","Entry$==0")
 
 ## 时标排序
 
+将原始的 ROOT 文件中的事件，按照时间戳从小到大进行排序。同时丢弃原始数据中的波形数据。
 
+转换后的数据中包含以下 branch，
+
+- ch 通道编号
+- qs 短门积分
+- ql 长门积分
+- format 参数标记，无用
+- ts 时间戳，每个数值表示 2 ns
+- ft cfd数值，该数值除以 1024 然后乘以 2 之后，单位为 ns，ts 时间戳加上 cfd 时间即口得到亚 ns 时间精度
+- nevt 事件在文件中的编号
+
+![time sort root file](/img/timesortfile.png)
 
 
 

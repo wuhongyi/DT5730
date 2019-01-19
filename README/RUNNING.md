@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 15:01:28 2019 (+0800)
-;; Last-Updated: 六 1月 19 15:50:56 2019 (+0800)
+;; Last-Updated: 六 1月 19 20:00:29 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 14
+;;     Update #: 16
 ;; URL: http://wuhongyi.cn -->
 
 # 程序运行
@@ -73,7 +73,7 @@ run6241_0 run6241_1 run6241_2
 
 ![数据写入界面](/img/dgtzwrite.png)
 
-<!-- ![在线监视与数据写入界面](/img/dgtzplot.png) -->
+![在线监视](/img/dgtzplot.png)
 
 ## 二进制转ROOT
 
@@ -157,7 +157,7 @@ VMEBaseAddress  0
 [RecordLength]
 144
 
-#波形记录采样点个数，最小可设置参数为??，数值需要为？？的倍数
+#波形记录采样点个数，最小可设置参数为16，数值需要为4的倍数
 ```
 
 ```bash
