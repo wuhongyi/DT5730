@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 1月 14 19:41:44 2019 (+0800)
-// Last-Updated: 一 1月 14 20:16:23 2019 (+0800)
+// Last-Updated: 六 1月 19 17:10:24 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 3
+//     Update #: 7
 // URL: http://wuhongyi.cn 
 
 #ifndef _TIMESORT_H_
@@ -18,7 +18,7 @@
 #include <vector>
 #include <algorithm>
 #include<iostream>
-
+#include <map>
 class TBranch;
 class TFile;
 class TTree;
@@ -27,13 +27,17 @@ class TBenchmark;
 
 #define MAXTRACEN 10000 // maximum number of trace points
 
-typedef std::pair<Long64_t, ULong64_t> PAIR;
-struct CmpByValue
+#define READENTRYUNDER 100000
+#define MAXENTRYINMAP  500000
+
+struct eventdata
 {
-  bool operator()(const PAIR& lhs, const PAIR& rhs)
-  {
-    return lhs.second < rhs.second;
-  }
+  Short_t         ch;
+  Short_t         qs;
+  Short_t         ql;
+  UInt_t          format;
+  ULong64_t       ts;
+  Short_t         ft;
 };
 
 class timesort
@@ -45,11 +49,14 @@ public:
   void Process();
 
 private:
-  void SortByTime();
-  void SaveByTime();
+
   
 private:
-  std::vector<PAIR> sortdata;
+  std::map<Long64_t,eventdata> sortdata;
+  std::map<Long64_t,eventdata>::iterator itkey;
+
+  Long64_t flagkey;
+  eventdata mapvalue;
   
   //old root
   TFile *filefile;
@@ -63,7 +70,9 @@ private:
   
   TBenchmark *benchmark;
   Long64_t TotalEntry;
-
+  Long64_t CurrentEntry;
+  
+  
   // Declaration of leaf types
    Short_t         ch;
    Short_t         qs;
