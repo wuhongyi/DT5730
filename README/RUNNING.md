@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 15:01:28 2019 (+0800)
-;; Last-Updated: 六 1月 19 13:59:30 2019 (+0800)
+;; Last-Updated: 六 1月 19 14:52:29 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 9
+;;     Update #: 11
 ;; URL: http://wuhongyi.cn -->
 
 # 程序运行
@@ -121,16 +121,34 @@ make       #编译
 
 ----
 
-## 输入卡参数
+## 输入卡GlobalParameters
 
 在输入卡**GlobalParameters.txt**中
 
 ```bash
+# PathToRawData 后面填写数据文件存放文件夹路径。
+# PlotChooseN 后面填写监视路每多少个信号更新一次。该参数仅在开启波形监视时生效。
+
 PathToRawData ../data
 PlotChooseN 1000
 ```
 
-**PathToRawData**后面填写数据文件存放文件夹路径。**PlotChooseN** 后面填写监视路每多少个信号更新一次。
+```bash
+# 当采用 USB 通讯时，参数按照以下设置
+LinkType  CAEN_DGTZ_USB
+VMEBaseAddress  0
+
+
+# 当采用光纤通讯时，参数按照以下设置
+LinkType  CAEN_DGTZ_PCI_OpticalLink
+VMEBaseAddress  0
+```
+
+当前输入卡中的其余参数，当前请勿修改。
+
+
+
+## 输入卡BoardParameters
 
 
 在输入卡**BoardParameters.txt**中对每个 channel 的参数进行设置。

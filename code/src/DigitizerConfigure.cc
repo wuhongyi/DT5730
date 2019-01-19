@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:56 2016 (+0800)
-// Last-Updated: 二 1月 15 13:58:33 2019 (+0800)
+// Last-Updated: 六 1月 19 14:15:22 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 231
+//     Update #: 232
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerGlobals.hh"
@@ -881,9 +881,10 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
   for (int ch = 0; ch < 8; ++ch)
   ret |= CAEN_DGTZ_WriteRegister(handle,(0x1084 | (ch<<8)), 0x207); 
   // for (int ch = 0; ch < 8; ++ch)
-  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1080 | (ch<<8)), 0x130040); 
-  for (int ch = 0; ch < 8; ++ch)
-  ret |= CAEN_DGTZ_WriteRegister(handle,(0x1028 | (ch<<8)), 0x1); 
+  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1080 | (ch<<8)), 0x130040);
+  
+  // for (int ch = 0; ch < 8; ++ch)
+  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1028 | (ch<<8)), 0x1); 
   
   // Set the DPP acquisition mode
   //   This setting affects the modes Mixed and List (see CAEN_DGTZ_DPP_AcqMode_t definition for details)
