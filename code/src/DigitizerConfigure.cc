@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:56 2016 (+0800)
-// Last-Updated: 六 1月 19 14:15:22 2019 (+0800)
+// Last-Updated: 六 1月 19 15:29:09 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 232
+//     Update #: 234
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerGlobals.hh"
@@ -883,8 +883,8 @@ int ProgramDigitizer_DT5730(int handle, DigitizerParams_t Params, CAEN_DGTZ_DPP_
   // for (int ch = 0; ch < 8; ++ch)
   // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1080 | (ch<<8)), 0x130040);
   
-  // for (int ch = 0; ch < 8; ++ch)
-  // ret |= CAEN_DGTZ_WriteRegister(handle,(0x1028 | (ch<<8)), 0x1); 
+  for (int ch = 0; ch < 8; ++ch)
+  ret |= CAEN_DGTZ_WriteRegister(handle,(0x1028 | (ch<<8)), Params.DynamicRange[ch]); 
   
   // Set the DPP acquisition mode
   //   This setting affects the modes Mixed and List (see CAEN_DGTZ_DPP_AcqMode_t definition for details)
@@ -1112,6 +1112,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
   int ChaMas;
   int TriggerHoldOff;
   char chamas[16];//
+  char dynamicrange[16];
   int Board_Read;
   char All[4], Pol[4];
   char str[255], BoardTag[MAXNB][255];
@@ -1137,7 +1138,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 
 	  if(strcmp(fgets(str,255,file),"[RunStartStopDelay]\n")!=0) 
 	    {
-	      printf("Read [RunStartStopDelay] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [RunStartStopDelay] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  fscanf(file,"%u\n",&RunStartStopDelay);
@@ -1146,7 +1147,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 
 	  if(strcmp(fgets(str,255,file),"[RecordLength]\n")!=0) 
 	    {
-	      printf("Read [RecordLength] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [RecordLength] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  fscanf(file,"%d\n",&RecLen);
@@ -1155,7 +1156,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 
 	  if(strcmp(fgets(str,255,file),"[ChannelMask]\n")!=0) 
 	    {
-	      printf("Read [ChannelMask] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [ChannelMask] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  ChaMas=0;
@@ -1176,11 +1177,33 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 	  Params[b].ChannelMask=ChaMas;
 	  // printf("[ChannelMask]\n%d\n",ChaMas);
 	  printf ("[ChannelMask]\n%s\n",chamas);
-
+	  
+	  if(strcmp(fgets(str,255,file),"[ChannelDynamicRange]\n")!=0) 
+	    {
+	      printf("Read [ChannelDynamicRange] ERROR! <BoardParameters.txt>\n"); 
+	      return -1;
+	    }
+	  fscanf(file,"\n%s\n",&dynamicrange);//
+	  for(i = 0; i < 8;i++)
+	    {
+	      if(dynamicrange[i]=='1'||dynamicrange[i]=='0')
+		{
+		  if(dynamicrange[i]=='0')
+		    Params[b].DynamicRange[7-i] = 0;
+		  else
+		    Params[b].DynamicRange[7-i] = 1;
+		}
+	      else 
+		{
+		  printf ("[ChannelDynamicRange] input error \n");
+		}
+	    }
+	  printf ("[ChannelDynamicRange]\n%s\n",dynamicrange);
+	  
 	  // for [TriggerHoldOff] tag
 	  if(strcmp(fgets(str,255,file),"[TriggerHoldOff]\n")!=0) 
 	    {
-	      printf("Read [TriggerHoldOff] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [TriggerHoldOff] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  fscanf(file,"%d\n",&TriggerHoldOff);
@@ -1191,14 +1214,14 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 	  fgets(str,255,file); // Parameter names
 	  if(strcmp(fgets(str,255,file),"[COMMON]\n")!=0) 
 	    {
-	      printf("Read [COMMEN] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [COMMEN] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  printf("%s", str);
 	  fscanf(file,"%s %s",All,Pol);
 	  if(strcmp(All,"ALL")!=0) 
 	    {
-	      printf("Read [ALL] ERROR! <DPP_Parameters.txt>\n"); 
+	      printf("Read [ALL] ERROR! <BoardParameters.txt>\n"); 
 	      return -1;
 	    }
 	  for(i=0; i<PARAMS_NUM; i++) 
@@ -1214,7 +1237,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 		Params[b].PulsePolarity[ch] = CAEN_DGTZ_PulsePolarityNegative;
 	      else
 		{
-		  printf("Read [POL] ERROR! <DPP_Parameters.txt>\n"); 
+		  printf("Read [POL] ERROR! <BoardParameters.txt>\n"); 
 		  return -1;
 		}
 	      // set all channels
@@ -1231,7 +1254,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 	  fgets(str,255,file); // for "\n"
 	  if(strcmp(fgets(str,255,file),"[INDIVIDUAL]\n")!=0) 
 	    {
-	      printf("Read [INDIVIDUAL] ERROR! <DPP_Parameters.txt> \n"); 
+	      printf("Read [INDIVIDUAL] ERROR! <BoardParameters.txt> \n"); 
 	      return -1;
 	    }
 	  printf("%s", str);
@@ -1255,7 +1278,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 		Params[b].PulsePolarity[ChNo] = CAEN_DGTZ_PulsePolarityNegative;
 	      else
 		{
-		  printf("Read [POL] ERROR! <DPP_Parameters.txt>\n"); 
+		  printf("Read [POL] ERROR! <BoardParameters.txt>\n"); 
 		  return -1;
 		}
 	      for(i=0; i<PARAMS_NUM; i++)
@@ -1267,7 +1290,7 @@ int ReadDPPParameters_PSD(DigitizerParams_t *Params, CAEN_DGTZ_DPP_PSD_Params_t 
 
       if(Board_Read==0) 
 	{
-	  printf("Read [Board Tag] ERROR! <DPP_Parameters.txt>\n"); 
+	  printf("Read [Board Tag] ERROR! <BoardParameters.txt>\n"); 
 	  return -1;
 	}
 

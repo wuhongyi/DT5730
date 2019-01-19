@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:11:05 2016 (+0800)
-// Last-Updated: 五 11月 30 14:50:03 2018 (+0800)
+// Last-Updated: 六 1月 19 15:22:02 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 36
+//     Update #: 37
 // URL: http://wuhongyi.cn 
 
 #ifndef _DIGITIZERGLOBALS_H_
@@ -69,7 +69,8 @@ struct DigitizerParams_t
   CAEN_DGTZ_PulsePolarity_t PulsePolarity[MaxNChannels];//ok
   uint32_t DPPPreTriggerSize[MaxNChannels];//ok
   float ChannelDCOffset[MaxNChannels];//ok
-
+  int DynamicRange[MaxNChannels];
+  
   CAEN_DGTZ_DPP_SaveParam_t SaveParam;//ok
   CAEN_DGTZ_TriggerMode_t SWTrgMode;//ok
   CAEN_DGTZ_TriggerMode_t ExtTrgMode;//ok

@@ -4,9 +4,9 @@
 ## Author: Hongyi Wu(吴鸿毅)
 ## Email: wuhongyi@qq.com 
 ## Created: 日 4月 24 15:38:34 2016 (+0800)
-## Last-Updated: 二 1月 15 10:23:06 2019 (+0800)
+## Last-Updated: 六 1月 19 15:51:03 2019 (+0800)
 ##           By: Hongyi Wu(吴鸿毅)
-##     Update #: 38
+##     Update #: 42
 ## URL: http:##wuhongyi.github.io 
 
 *** DPP PSD Parameters for CAEN Digitizer ***
@@ -17,20 +17,26 @@
 144
 [ChannelMask]
 11111111
+[ChannelDynamicRange]
+00000000
 [TriggerHoldOff]
 8
 Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
 [COMMON]
-  ALL   NEG   -43      30     50      1       0       24     100     8     50     1     1     3      3      1
+  ALL   NEG   -43      30     50      1       0    24     100     8       50     1     0     3      3      1
 [INDIVIDUAL]
-
-
+  2     POS    43      30     150     1       0    24     100     8       50     1     0     3      3      1
+  6     POS    43      30     150     1       0    24     100     8       50     1     0     3      3      1
 
 
 /* end */
 /**************************************************************************************************************************************/
 
-RunStartStopDelay: Set the delay time between the arrival of the start signal at the input of the board (either SIN or TRGIN) and the actual start of run
+RunStartStopDelay: 暂时没用，设置为0
+RecordLength: 波形记录采样点个数，最小可设置参数为??，数值需要为？？的倍数
+ChannelMask:  通道是否开启的标记，从右往左依次为0-7通道，标记为1表示开启该通道，标记为0表示不启用该通道
+ChannelDynamicRange: 通道输入动态范围，从右往左依次为0-7通道，标记0表示2V动态范围，标记1表示0.5V动态范围。
+TriggerHoldOff:
 
 Channel: set "ALL" in [COMMON] section; set channel number in [INDIVIDUAL] section; set negative value for disabled channel in [INDIVIDUAL] section
 Pol   : Polarity (Optional value: POS or NEG) (case sensitive)
