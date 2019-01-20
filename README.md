@@ -7,7 +7,7 @@ DT5730 DPP-PSD 固件有 List、Oscilloscope、Mixed 三种模式，List 模式�
 程序包中包含以下文件夹/文件：
 - CAEN  存放本程序依赖的驱动，硬件说明书
 - code  程序
-	- analysis 存在数据转换、时标排序等程序
+	- analysis 存放数据转换等程序
 	- bin 存放获取可执行程序
 	- cmake 存放 CMake依赖文件
 	- data 数据存放路径

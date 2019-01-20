@@ -4,9 +4,9 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 五 1月 18 23:47:43 2019 (+0800)
-;; Last-Updated: 六 1月 19 20:07:52 2019 (+0800)
+;; Last-Updated: 日 1月 20 13:44:59 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 5
+;;     Update #: 7
 ;; URL: http://wuhongyi.cn -->
 
 # 示例教程
@@ -29,7 +29,7 @@
 [ChannelDynamicRange]
 00000000
 [TriggerHoldOff]
-0
+100
 Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
 [COMMON]
   ALL   NEG   -43      4     50      1       0    24     100     4       50     1     0     3      3      1
@@ -62,7 +62,7 @@ Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   n
 [ChannelDynamicRange]
 00000000
 [TriggerHoldOff]
-0
+100
 Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   nsbl  discr  cfdf   cfdd   trgc  
 [COMMON]
   ALL   NEG   -43      4     150     1       0    24     100     8       50     1     0     3      2      1
@@ -82,7 +82,7 @@ Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   n
 
 为了得到最好的中子，需要确定最佳短门积分门宽。
 
-这里我们给出一种较容易操作的方案来：首先按照初步长短门积分门进行PSD，得到中子伽马鉴别图，从图中选择中子、伽马事件各 3000 个，对每种粒子的 3000 个事件的波形依次进行面积归一化，将归一化的 3000 个波形取平均，如下图，黑线为伽马粒子的波形，红线为中子的波形，对两种粒子的波形作差，得到图中蓝线，为两种粒子的差异。途中两个绿线指示范围即为最佳短门积分门宽。
+这里我们给出一种较容易操作的方案来：首先按照初步长短门积分门进行 PSD，得到中子伽马鉴别图，从图中选择中子、伽马事件各 3000 个，对每种粒子的 3000 个事件的波形依次进行面积归一化，将归一化的 3000 个波形取平均，如下图，黑线为伽马粒子的波形，红线为中子的波形，对两种粒子的波形作差，得到图中蓝线，为两种粒子的差异。途中两个绿线指示范围即为最佳短门积分门宽。
 
 ![积分门优化](/img/neutrongammagate.jpg)
 
