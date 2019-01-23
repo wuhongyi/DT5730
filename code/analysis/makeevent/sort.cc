@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 二 1月 15 09:20:33 2019 (+0800)
-// Last-Updated: 二 1月 15 09:42:36 2019 (+0800)
+// Last-Updated: 三 1月 23 18:41:48 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 2
+//     Update #: 3
 // URL: http://wuhongyi.cn 
 
 #include "sort.hh"
@@ -48,8 +48,8 @@ sort::sort(TString filepath,int runnumber)
   file = new TFile(TString::Format("%s/run%04d_W.root",filepath.Data(),runnumber).Data(),"RECREATE");
   t = new TTree("t","PKU CAEN DT5730 Event Data");
   t->Branch("CH", &CH, "CH[8]/S");
-  t->Branch("QS", &QS, "QS[8]/S");
-  t->Branch("QL", &QL, "QL[8]/S");
+  t->Branch("QS", &QS, "QS[8]/s");
+  t->Branch("QL", &QL, "QL[8]/s");
   t->Branch("TS", &TS, "TS[8]/L");
   t->Branch("FT", &FT, "FT[8]/S");  
 

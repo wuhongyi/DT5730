@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 日 4月 24 17:55:37 2016 (+0800)
-// Last-Updated: 五 11月 30 13:10:50 2018 (+0800)
+// Last-Updated: 三 1月 23 18:38:20 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 96
+//     Update #: 98
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerUser.hh"
@@ -97,7 +97,7 @@ void UpdateWhenFileFillUp(DigitizerRun_t *PKU_DGTZ_RunManager)
     }
 }
 
-int SaveWaveform(int16_t ch,uint32_t TimeTag,int16_t ChargeShort,int16_t ChargeLong,uint32_t Format,uint32_t Extras,int16_t size,uint16_t *WaveData)
+int SaveWaveform(int16_t ch,uint32_t TimeTag,uint16_t ChargeShort,int16_t ChargeLong,int32_t Format,uint32_t Extras,int16_t size,uint16_t *WaveData)
 {
   fwrite(&ch,sizeof(int16_t),1,PKU_DGTZ_FilePointer);//channel
   fwrite(&TimeTag,sizeof(uint32_t),1,PKU_DGTZ_FilePointer);

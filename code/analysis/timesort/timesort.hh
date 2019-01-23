@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 1月 14 19:41:44 2019 (+0800)
-// Last-Updated: 六 1月 19 17:10:24 2019 (+0800)
+// Last-Updated: 三 1月 23 18:40:43 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 7
+//     Update #: 8
 // URL: http://wuhongyi.cn 
 
 #ifndef _TIMESORT_H_
@@ -33,8 +33,8 @@ class TBenchmark;
 struct eventdata
 {
   Short_t         ch;
-  Short_t         qs;
-  Short_t         ql;
+  UShort_t         qs;
+  UShort_t         ql;
   UInt_t          format;
   ULong64_t       ts;
   Short_t         ft;
@@ -75,8 +75,8 @@ private:
   
   // Declaration of leaf types
    Short_t         ch;
-   Short_t         qs;
-   Short_t         ql;
+   UShort_t         qs;
+   UShort_t         ql;
    UInt_t          format;
    ULong64_t       ts;
    Short_t         ft;

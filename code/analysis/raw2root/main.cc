@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Fri Apr 29 21:54:43 2016 (+0800)
-// Last-Updated: 六 1月 19 10:28:50 2019 (+0800)
+// Last-Updated: 三 1月 23 18:39:14 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 26
+//     Update #: 27
 // URL: http://wuhongyi.cn 
 
 #include <cstdio>
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 
   short ch;
   unsigned int TimeTag;
-  short ChargeShort;//int16_t
-  short ChargeLong;
+  unsigned short ChargeShort;//int16_t
+  unsigned short ChargeLong;
   uint32_t Format;
   uint32_t Extras;
   unsigned long ts;//uint64_t
@@ -80,8 +80,8 @@ int main(int argc, char *argv[])
 	      f = new TFile(filename,"RECREATE");//"RECREATE" "READ"
 	      t = new TTree("t","PKU Digitizer data");
 	      t->Branch("ch", &ch, "ch/S");
-	      t->Branch("qs", &ChargeShort, "qs/S");
-	      t->Branch("ql", &ChargeLong, "ql/S");
+	      t->Branch("qs", &ChargeShort, "qs/s");
+	      t->Branch("ql", &ChargeLong, "ql/s");
 	      t->Branch("format", &Format, "format/i");
 	      t->Branch("ts", &ts, "ts/l");
 	      t->Branch("ft", &ft, "ft/S");

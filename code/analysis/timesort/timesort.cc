@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 一 1月 14 19:44:11 2019 (+0800)
-// Last-Updated: 六 1月 19 20:34:18 2019 (+0800)
+// Last-Updated: 三 1月 23 18:40:43 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 33
+//     Update #: 34
 // URL: http://wuhongyi.cn 
 
 #include "timesort.hh"
@@ -47,8 +47,8 @@ timesort::timesort(TString filepath,int runnumber)
   file = new TFile(TString::Format("%s/run%04d_sort.root",filepath.Data(),runnumber).Data(),"RECREATE");
   t = new TTree("t","PKU CAEN DT5730 Sort Time Data");
   t->Branch("ch", &ch, "ch/S");
-  t->Branch("qs", &qs, "qs/S");
-  t->Branch("ql", &ql, "ql/S");
+  t->Branch("qs", &qs, "qs/s");
+  t->Branch("ql", &ql, "ql/s");
   t->Branch("format", &format, "format/i");
   t->Branch("ts", &ts, "ts/L");
   t->Branch("ft", &ft, "ft/S");

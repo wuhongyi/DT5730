@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: 二 1月 15 09:20:13 2019 (+0800)
-// Last-Updated: 二 1月 15 09:42:36 2019 (+0800)
+// Last-Updated: 三 1月 23 18:41:48 2019 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 2
+//     Update #: 3
 // URL: http://wuhongyi.cn 
 
 #ifndef _SORT_H_
@@ -47,8 +47,8 @@ private:
   Long64_t TotalEntry;
   
   Short_t         ch;
-  Short_t         qs;
-  Short_t         ql;
+  UShort_t         qs;
+  UShort_t         ql;
   ULong64_t       ts;
   Short_t         ft;
 
