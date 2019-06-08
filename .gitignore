@@ -1,3 +1,4 @@
 build/
 *.root
 node_modules/*
+data/

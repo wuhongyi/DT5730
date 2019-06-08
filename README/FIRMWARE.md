@@ -4,12 +4,14 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 二 1月 15 23:47:46 2019 (+0800)
-;; Last-Updated: 三 1月 16 12:19:48 2019 (+0800)
+;; Last-Updated: 五 1月 18 23:45:10 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 2
+;;     Update #: 4
 ;; URL: http://wuhongyi.cn -->
 
 # 固件
+
+<!-- toc -->
 
 > **[warning] 注意**
 >
@@ -21,7 +23,9 @@
 ## 当前固件版本
 
 ```text
-DT5730 DPP-PSD 
+DT5730 DPP-PSD 4.17_136.16
+A2818  1.00
+A3818  0.05
 ```
 
 ## 查看固件版本
@@ -59,8 +63,19 @@ CAENUpgraderGUI
 
 ![Update A3818](/img/A3818UpdateVersion.png)
 
+### DT5730
 
+如下图，查看 DT5730 的固件版本，点击 *Get Fw Rel* 按钮。
 
+![Get DT5730 Version](/img/GetFirmwareDT5730.png)
+
+如果该固件版本不是 **当前固件版本** 所列版本，则升级固件。
+
+升级界面如下图所示：  
+
+**其中连接类型选项中，如果采用光纤连接，则选择 OPTLINK，如果采用 USB 连接，则选择 USB 选项。**
+
+![Update DT5730](/img/UpgradeFirmwareDT5730.png)
 
 
 

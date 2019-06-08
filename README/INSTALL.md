@@ -4,16 +4,69 @@
 ;; Author: Hongyi Wu(吴鸿毅)
 ;; Email: wuhongyi@qq.com 
 ;; Created: 二 1月 15 23:47:26 2019 (+0800)
-;; Last-Updated: 三 1月 16 14:17:03 2019 (+0800)
+;; Last-Updated: 六 6月  8 20:22:01 2019 (+0800)
 ;;           By: Hongyi Wu(吴鸿毅)
-;;     Update #: 3
+;;     Update #: 9
 ;; URL: http://wuhongyi.cn -->
 
 # 程序安装
 
+<!-- toc -->
+
 本获取经过 Scientific Linux 7 系统测试。建议采用 CentOS 7 或者 Scientific Linux 7。
 
-本获取要求 CERN ROOT 6，要求必须安装 FFTW3 库。
+- 本获取要求 CERN ROOT 6，要求必须安装 FFTW3 库。
+- 要求电脑的内存配置较大，建议 16 GB 或者 32 GB 或者以上。
+
+**用户可通过 yum 安装 fftw3，也可自行下载源代码安装。以下为 CentOS/Scientific Linux 下 yum 安装的命令：**
+
+```bash
+yum -y install fftw.x86_64 fftw-devel.x86_64 fftw-libs.x86_64
+```
+
+**以下为可选安装，安装之后 ROOT 可使用功能更多。根据需要安装即可。**
+
+```bash
+yum -y install lz4.x86_64 lz4-devel.x86_64
+yum -y install gsl.x86_64 gsl-devel.x86_64
+yum -y install graphviz.x86_64 graphviz-devel.x86_64
+yum -y install ruby.x86_64 ruby-devel.x86_64 ruby-libs.x86_64
+yum -y install expect.x86_64 expect-devel.x86_64
+yum -y install davix.x86_64 davix-devel.x86_64
+yum -y install unuran.x86_64 unuran-devel.x86_64
+yum -y install avahi-compat-libdns_sd.x86_64 avahi-compat-libdns_sd-devel.x86_64
+yum -y install ftgl.x86_64 ftgl-devel.x86_64
+yum -y install glew.x86_64 glew-devel.x86_64
+yum -y install mysql++.x86_64 mysql++-devel.x86_64
+yum -y install cfitsio.x86_64 cfitsio-devel.x86_64
+yum -y install libxml2*
+yum -y install binutils-devel.x86_64
+yum -y install pythia8.x86_64 pythia8-devel.x86_64
+yum -y install redhat-lsb.x86_64
+yum -y install R.x86_64
+yum -y install R-RInside.x86_64 R-RInside-devel.x86_64 R-Rcpp.x86_64 R-Rcpp-devel.x86_64
+```
+
+
+## ROOT 软件安装
+
+**以下示例演示如何将 ROOT 安装到 /opt 目录下**
+
+```bash
+## https://root.cern.ch/building-root
+# cmake安装方法，以 6.08.06 为例。 安装之后 .bashrc 中添加 source /opt/root60806/bin/thisroot.sh
+tar -zxvf root_v6.08.06.source.tar.gz
+mkdir buildroot60806
+cd buildroot60806/
+cmake -DCMAKE_INSTALL_PREFIX=/opt/root60806 -Dall=ON  ../root-6.08.06/
+make -j8
+make install
+rm -rf buildroot60806
+```
+
+
+
+
 
 **通过 yum 安装 fftw3**
 
@@ -64,13 +117,45 @@ rm -rf buildroot60806
 
 ## CAEN Lib
 
-本程序依赖 CAENVMELib/CAENComm/CAENUpgrader 三个库文件。
+本程序依赖 CAENVMELib/CAENComm/CAENDigitizer/CAENUpgrader 四个库文件。
 
-其中 CAENVMELib/CAENComm 为获取运行必须的库。CAENUpgrader 用来更新固件。
+其中 CAENVMELib/CAENComm/CAENDigitizer 为获取运行必须的库。CAENUpgrader 用来更新固件。
+
+### CAENVMELib
+
+```bash
+tar -xzvf CAENVMELib-2.50.tgz
+cd CAENVMELib-2.50/lib
+sh install_x64     #需要ROOT权限
+```
+
+### CAENComm
+
+```bash
+tar -xvzf CAENComm-1.2-build20140211.tgz
+cd CAENComm-1.2/lib
+sh install_x64     #需要ROOT权限
+```
+
+### CAENDigitizer
+
+```bash
+tar -zxvf CAENDigitizer_2.11.0_20180212.tgz
+sh install_64      #需要ROOT权限
+```
 
 
+### CAENUpgrader
 
-## 检查CAENUpgrader安装
+```bash
+tar -xvzf CAENUpgrader-1.6.3-build20170511.tgz
+cd CAENUpgrader-1.6.3
+./configure
+make 
+make install       #需要ROOT权限
+```
+
+## 检查 CAENUpgrader 安装
 
 安装后在终端中输入 
 ```
@@ -109,7 +194,7 @@ make                               #需要ROOT权限
 #或者在开启电脑之后执行以上命令
 ```
 
-重启机箱后，在终端内输入 **dmesg|grep a2818** 将会看到以下的A2818驱动加载信息
+重启电脑后，在终端内输入 **dmesg|grep a2818** 将会看到以下的A2818驱动加载信息
 
 ```
 a2818: CAEN A2818 CONET controller driver v1.20s
@@ -152,7 +237,7 @@ found A3818 Link 0 BAR at iomem ffffc900067d6000 irq 0
   CAEN PCIe: 1 device(s) found.
 ```
 
-
+**需要注意的是每次启动电脑之后均需要重新加载 A3818 驱动**
 
 
 
