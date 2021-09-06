@@ -4,9 +4,9 @@
 # Author: Hongyi Wu(吴鸿毅)
 # Email: wuhongyi@qq.com 
 # Created: 日 4月 24 15:24:50 2016 (+0800)
-# Last-Updated: 五 1月 18 15:53:40 2019 (+0800)
+# Last-Updated: 一 9月  6 21:33:06 2021 (+0800)
 #           By: Hongyi Wu(吴鸿毅)
-#     Update #: 39
+#     Update #: 41
 # URL: http://wuhongyi.cn 
 
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
@@ -20,11 +20,11 @@ project(${PROJ_NAME})
 #SET(CMAKE_BUILD_TYPE Debug)
 
 ##C99  ROOT不支持C++11采用以下两行
-# set(CMAKE_CXX_FLAGS " -fPIC -W -Wall -s")#
-# set(CMAKE_C_FLAGS " -fPIC -W -Wall -s")#
+set(CMAKE_CXX_FLAGS " -fPIC -W -Wall -s")#
+set(CMAKE_C_FLAGS " -fPIC -W -Wall -s")#
 ##C++11  ROOT支持C++11采用以下两行
-set(CMAKE_CXX_FLAGS "-std=c++11  -fPIC -W -Wall -s")#
-set(CMAKE_C_FLAGS "-std=c++11  -fPIC   -W -Wall -s")#
+# set(CMAKE_CXX_FLAGS "-std=c++11  -fPIC -W -Wall -s")#
+# set(CMAKE_C_FLAGS "-std=c++11  -fPIC   -W -Wall -s")#
 
 #----------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 #----------------------------------------------------------------------------
 
 add_executable(${PROJ_NAME} main.cc ${sources} ${headers})
-target_link_libraries(${PROJ_NAME}  -pthread CAENDigitizer ${ROOT_LIBRARIES}  m dl -rdynamic ncurses c) #${libs}  
+target_link_libraries(${PROJ_NAME} ${ROOT_LIBRARIES} CAENDigitizer m dl -pthread -rdynamic ncurses c) #${libs}  
 
 #----------------------------------------------------------------------------
 

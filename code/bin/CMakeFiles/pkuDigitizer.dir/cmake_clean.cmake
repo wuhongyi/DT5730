@@ -4,8 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pkuDigitizer.dir/src/DigitizerConfigure.cc.o"
   "CMakeFiles/pkuDigitizer.dir/src/DigitizerPlot.cc.o"
   "CMakeFiles/pkuDigitizer.dir/src/DigitizerUser.cc.o"
-  "pkuDigitizer.pdb"
   "pkuDigitizer"
+  "pkuDigitizer.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

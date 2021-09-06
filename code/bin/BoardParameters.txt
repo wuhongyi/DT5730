@@ -4,9 +4,9 @@
 ## Author: Hongyi Wu(吴鸿毅)
 ## Email: wuhongyi@qq.com 
 ## Created: 日 4月 24 15:38:34 2016 (+0800)
-## Last-Updated: 一 1月 21 16:36:47 2019 (+0800)
+## Last-Updated: 一 1月 21 16:06:39 2019 (+0800)
 ##           By: Hongyi Wu(吴鸿毅)
-##     Update #: 44
+##     Update #: 43
 ## URL: http:##wuhongyi.github.io 
 
 *** DPP PSD Parameters for CAEN Digitizer ***
@@ -25,8 +25,6 @@ Channel POL  Offset  PreTrg  thr   selft   csecs  sgate  lgate  pgate   tvaw   n
 [COMMON]
   ALL   NEG   -43      30     150      1       0    24     100     8      50     1     0     3      2      1
 [INDIVIDUAL]
-
-
 
 
 

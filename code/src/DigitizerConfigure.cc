@@ -4,9 +4,9 @@
 // Author: Hongyi Wu(吴鸿毅)
 // Email: wuhongyi@qq.com 
 // Created: Thu Apr 28 22:16:56 2016 (+0800)
-// Last-Updated: 六 1月 19 15:29:09 2019 (+0800)
+// Last-Updated: 一 9月  6 21:28:31 2021 (+0800)
 //           By: Hongyi Wu(吴鸿毅)
-//     Update #: 234
+//     Update #: 235
 // URL: http://wuhongyi.cn 
 
 #include "DigitizerGlobals.hh"
@@ -42,7 +42,7 @@ int DigitizerInit(CAEN_DGTZ_DPP_PSD_Params_t *PKU_DGTZ_DPPParams,DigitizerParams
       std::cout<<"LinkType:"<<" "<<tempstring1<<" "<<"VMEBaseAddress:"<<" "<<tempstring2<<std::endl;
       if(tempstring1 == "CAEN_DGTZ_PCI_OpticalLink")
       	{
-      	  PKU_DGTZ_Params[b].LinkType = CAEN_DGTZ_PCI_OpticalLink;
+      	  PKU_DGTZ_Params[b].LinkType = CAEN_DGTZ_OpticalLink;
       	  if(tempstring2=="0")
       	    {
       	      PKU_DGTZ_Params[b].VMEBaseAddress = 0;
@@ -86,7 +86,7 @@ int DigitizerInit(CAEN_DGTZ_DPP_PSD_Params_t *PKU_DGTZ_DPPParams,DigitizerParams
       	    {
       	      if(tempstring1 == "CAEN_DGTZ_PCIE_OpticalLink")
       		{
-      		  PKU_DGTZ_Params[b].LinkType = CAEN_DGTZ_PCIE_OpticalLink;
+      		  PKU_DGTZ_Params[b].LinkType = CAEN_DGTZ_OpticalLink;
       		  if(tempstring2=="0x32100000")
       		    {
       		      PKU_DGTZ_Params[b].VMEBaseAddress = 0x32100000;

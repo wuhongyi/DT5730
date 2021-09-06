@@ -4,18 +4,18 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/wuhongyi/DT5730/code/main.cc" "/home/wuhongyi/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/main.cc.o"
-  "/home/wuhongyi/DT5730/code/src/DigitizerAdmin.cc" "/home/wuhongyi/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerAdmin.cc.o"
-  "/home/wuhongyi/DT5730/code/src/DigitizerConfigure.cc" "/home/wuhongyi/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerConfigure.cc.o"
-  "/home/wuhongyi/DT5730/code/src/DigitizerPlot.cc" "/home/wuhongyi/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerPlot.cc.o"
-  "/home/wuhongyi/DT5730/code/src/DigitizerUser.cc" "/home/wuhongyi/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerUser.cc.o"
+  "/home/wuhongyi/workgithub/DAQ/DT5730/code/main.cc" "/home/wuhongyi/workgithub/DAQ/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/main.cc.o"
+  "/home/wuhongyi/workgithub/DAQ/DT5730/code/src/DigitizerAdmin.cc" "/home/wuhongyi/workgithub/DAQ/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerAdmin.cc.o"
+  "/home/wuhongyi/workgithub/DAQ/DT5730/code/src/DigitizerConfigure.cc" "/home/wuhongyi/workgithub/DAQ/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerConfigure.cc.o"
+  "/home/wuhongyi/workgithub/DAQ/DT5730/code/src/DigitizerPlot.cc" "/home/wuhongyi/workgithub/DAQ/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerPlot.cc.o"
+  "/home/wuhongyi/workgithub/DAQ/DT5730/code/src/DigitizerUser.cc" "/home/wuhongyi/workgithub/DAQ/DT5730/code/bin/CMakeFiles/pkuDigitizer.dir/src/DigitizerUser.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
-  "/opt/root61206/include"
+  "/opt/ROOT/root62402/include"
   )
 
 # Targets to which this target links.
